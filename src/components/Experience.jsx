@@ -1,13 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ExperienceScene from './3d/ExperienceScene';
 
 const Experience = () => {
   const experiences = [
     {
-      date: "2023 - Present",
-      role: "Senior Digital Designer",
-      company: "Creative Pulse Agency",
-      desc: "Leading the design system initiative and crafting narrative-driven web experiences for Fortune 500 clients."
+      date: "2026 - Present",
+      role: "AI Full Stack Web Developer",
+      company: "Freelance / Independent",
+      desc: "Building next-generation web experiences with AI integration, immersive 3D interactions, and blockchain technologies."
     },
     {
       date: "2020 - 2023",
@@ -24,8 +25,12 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="container" style={{ padding: '150px 0', minHeight: '100vh' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
+    <section id="experience" style={{ position: 'relative', padding: '150px 0', minHeight: '100vh', overflow: 'hidden' }}>
+      
+      {/* 3D Background - Now Full Width */}
+      <ExperienceScene />
+
+      <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', position: 'relative', zIndex: 1 }}>
         
         {/* Sticky Header */}
         <div style={{ position: 'sticky', top: '100px', height: 'fit-content' }}>

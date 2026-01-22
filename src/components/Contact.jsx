@@ -29,11 +29,11 @@ const Contact = () => {
         </motion.a>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem' }}>
-          <span className="font-sans text-muted">© 2025</span>
+          <span className="font-sans text-muted">© 2025 Fazal Ur Rehman</span>
           <div style={{ display: 'flex', gap: '2rem' }}>
-            <a href="#" className="font-sans text-muted" style={{ textDecoration: 'none' }}>LinkedIn</a>
-            <a href="#" className="font-sans text-muted" style={{ textDecoration: 'none' }}>Twitter</a>
-            <a href="#" className="font-sans text-muted" style={{ textDecoration: 'none' }}>Instagram</a>
+            <a href="#" target="_blank" rel="noopener noreferrer" className="font-sans text-muted" style={{ textDecoration: 'none' }}>LinkedIn</a>
+            <a href="https://x.com/_fazalurrehman0" target="_blank" rel="noopener noreferrer" className="font-sans text-muted" style={{ textDecoration: 'none' }}>Twitter/X</a>
+            <a href="https://github.com/fazalurrehman" target="_blank" rel="noopener noreferrer" className="font-sans text-muted" style={{ textDecoration: 'none' }}>GitHub</a>
           </div>
         </div>
       </div>
