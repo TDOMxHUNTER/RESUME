@@ -8,6 +8,7 @@
   
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Inter', sans-serif;
+  --font-hand: 'Caveat', cursive;
 }
 
 * {
@@ -35,6 +36,7 @@ body {
 /* Typography Utilities */
 .font-display { font-family: var(--font-serif); }
 .font-sans { font-family: var(--font-sans); }
+.font-hand { font-family: var(--font-hand); }
 .text-gold { color: var(--accent-gold); }
 .text-muted { color: var(--text-muted); }
 
