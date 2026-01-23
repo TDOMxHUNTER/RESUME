@@ -109,7 +109,21 @@ const Cursor = () => {
     };
 
     const handleMouseOver = (e) => {
-      if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+      const target = e.target;
+      
+      const isLinkOrButton = 
+        target.tagName === 'A' || 
+        target.tagName === 'BUTTON' || 
+        target.closest('a') || 
+        target.closest('button');
+
+      // Also trigger for Headings and Large Text
+      const isHeading = 
+        ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(target.tagName) ||
+        target.classList.contains('font-display') ||
+        target.classList.contains('text-huge');
+
+      if (isLinkOrButton || isHeading) {
         setIsHovered(true);
       } else {
         setIsHovered(false);
@@ -138,17 +152,17 @@ const Cursor = () => {
             borderRadius: '50%',
             pointerEvents: 'none',
             zIndex: 9999,
-            // mixBlendMode: 'normal' to see gold color
-            border: '1px solid rgba(197, 160, 89, 0.3)', // Subtle container ring
+            mixBlendMode: 'difference', // Key for the text color change effect
+            border: '1px solid rgba(197, 160, 89, 0.5)', 
             overflow: 'hidden',
-            backgroundColor: 'rgba(0,0,0,0.2)' // Slight dark tint bg
         }}
         animate={{
-            scale: isHovered ? 1.5 : 1,
+            scale: isHovered ? 2.5 : 1, // Bigger scale for "Lens" feel
+            backgroundColor: isHovered ? '#C5A059' : 'rgba(0,0,0,0)', // Solid Gold on hover causes the invert effect
         }}
         >
         <Canvas 
-            dpr={[1, 1.5]} // Optimized pixel ratio
+            dpr={[1, 1.5]} 
             camera={{ position: [0, 0, 1], zoom: 1 }}
             gl={{ alpha: true, preserveDrawingBuffer: false }}
         >
