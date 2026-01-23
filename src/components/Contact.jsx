@@ -116,9 +116,9 @@ const Contact = () => {
                     style={{ 
                         width: '40px', 
                         height: 'auto', 
-                        filter: 'invert(2)', 
+                        filter: 'invert(1)', 
                         opacity: 0.6, 
-                        transform: 'rotate(90deg)' // Pointing Down
+                        transform: 'rotate(270deg)' // Pointing Down
                     }} 
                 />
                  <span className="font-hand" style={{ fontSize: '1.4rem', maxWidth: '180px', textAlign: 'center', color: 'var(--text-muted)', lineHeight: 1.2 }}>
