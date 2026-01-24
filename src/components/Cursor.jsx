@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
-// --- SHADER CODE (Optimized for Cursor) ---
+// --- SHADER CODE ---
 const CursorSmokeMaterial = {
   uniforms: {
     uTime: { value: 0 },
@@ -49,7 +49,7 @@ const CursorSmokeMaterial = {
 
     void main() {
       vec2 uv = vUv;
-      float t = uTime * 0.8; // Faster flow for small scale
+      float t = uTime * 0.8; 
       
       float noise1 = snoise(uv * 2.0 + t);
       float noise2 = snoise(uv * 2.0 - t + noise1);
@@ -57,33 +57,28 @@ const CursorSmokeMaterial = {
       
       float smoke = smoothstep(0.2, 0.9, pattern);
       
-      // Masking circle (since it's in a square canvas)
       float dist = distance(uv, vec2(0.5));
-      float alpha = 1.0 - smoothstep(0.4, 0.5, dist); // Hard circle mask
+      float alpha = 1.0 - smoothstep(0.4, 0.5, dist); 
 
-      vec3 finalColor = mix(vec3(0.0), uColor, smoke * 0.8);
+      // High visibility smoke
+      vec3 finalColor = mix(vec3(0.0), uColor, smoke * 2.0); 
       
-      gl_FragColor = vec4(finalColor, alpha); // Use alpha for shape
+      gl_FragColor = vec4(finalColor, alpha);
     }
   `
 };
 
 const CursorLiquid = () => {
     const materialRef = useRef();
-    
     useFrame((state) => {
-        if(materialRef.current) {
-            materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime();
-        }
+        if(materialRef.current) materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime();
     });
-
     const shaderArgs = useMemo(() => ({
         uniforms: { uTime: { value: 0 }, uColor: { value: new THREE.Color('#C5A059') } },
         vertexShader: CursorSmokeMaterial.vertexShader,
         fragmentShader: CursorSmokeMaterial.fragmentShader,
         transparent: true
     }), []);
-
     return (
         <mesh>
             <planeGeometry args={[2, 2]} />
@@ -97,33 +92,27 @@ const Cursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
-  // Physics (Smooth)
+  // Smooth "Lazy Follow" Physics (No Bounce)
   const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     const moveCursor = (e) => {
-      cursorX.set(e.clientX - 24); // Centered (48px / 2)
-      cursorY.set(e.clientY - 24);
+      cursorX.set(e.clientX - 16); // Reverted to 16px (Center of 32px)
+      cursorY.set(e.clientY - 16);
     };
 
     const handleMouseOver = (e) => {
       const target = e.target;
-      
+      // Strict Check: Only Links or Buttons
       const isLinkOrButton = 
         target.tagName === 'A' || 
         target.tagName === 'BUTTON' || 
         target.closest('a') || 
         target.closest('button');
 
-      // Also trigger for Headings and Large Text
-      const isHeading = 
-        ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(target.tagName) ||
-        target.classList.contains('font-display') ||
-        target.classList.contains('text-huge');
-
-      if (isLinkOrButton || isHeading) {
+      if (isLinkOrButton) {
         setIsHovered(true);
       } else {
         setIsHovered(false);
@@ -139,37 +128,37 @@ const Cursor = () => {
   }, []);
 
   return (
-    <>
-        <motion.div
-        style={{
-            translateX: cursorXSpring,
-            translateY: cursorYSpring,
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '48px', // Slightly larger for detail
-            height: '48px',
-            borderRadius: '50%',
-            pointerEvents: 'none',
-            zIndex: 9999,
-            mixBlendMode: 'difference', // Key for the text color change effect
-            border: '1px solid rgba(197, 160, 89, 0.5)', 
-            overflow: 'hidden',
-        }}
-        animate={{
-            scale: isHovered ? 2.5 : 1, // Bigger scale for "Lens" feel
-            backgroundColor: isHovered ? '#C5A059' : 'rgba(0,0,0,0)', // Solid Gold on hover causes the invert effect
-        }}
-        >
+    <motion.div
+      style={{
+        translateX: cursorXSpring,
+        translateY: cursorYSpring,
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '32px', // Reverted to 32px
+        height: '32px',
+        border: '1px solid var(--accent-gold)', // Reverted to var
+        borderRadius: '50%',
+        pointerEvents: 'none',
+        zIndex: 9999,
+        mixBlendMode: 'difference',
+        overflow: 'hidden',
+      }}
+      animate={{
+        scale: isHovered ? 1.5 : 1, // Strict 1.5x scale
+        backgroundColor: isHovered ? 'var(--accent-gold)' : 'rgba(0,0,0,0)', // Reverted to var
+      }}
+    >
         <Canvas 
+            frameloop="always" 
             dpr={[1, 1.5]} 
             camera={{ position: [0, 0, 1], zoom: 1 }}
             gl={{ alpha: true, preserveDrawingBuffer: false }}
+            style={{ pointerEvents: 'none' }} // FIX: Canvas was blocking mouse events!
         >
             <CursorLiquid />
         </Canvas>
-        </motion.div>
-    </>
+    </motion.div>
   );
 };
 

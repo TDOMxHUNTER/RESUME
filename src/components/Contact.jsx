@@ -75,7 +75,7 @@ const Contact = () => {
             {/* GitHub Block: Link -> Arrow -> Quote */}
              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
                 <a 
-                    href="https://github.com/fazalurrehman" 
+                    href="https://github.com/TDOMxHUNTER" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="font-display" 
@@ -102,7 +102,7 @@ const Contact = () => {
             {/* LinkedIn Block: Link -> Arrow -> Quote */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
                 <a 
-                    href="#" 
+                    href="https://www.linkedin.com/in/fazal-ur-rehman-b1296b256/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="font-display" 

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { View } from '@react-three/drei';
+import { Link } from 'react-router-dom';
 import HeroScene from './3d/HeroScene';
 
 const Hero = () => {
@@ -39,12 +40,12 @@ const Hero = () => {
         
         <div style={{ overflow: 'hidden' }}>
             <motion.h1 variants={item} className="font-display text-huge" style={{ lineHeight: 0.85, fontWeight: 400 }}>
-                DIGITAL
+                THE
             </motion.h1>
         </div>
         <div style={{ overflow: 'hidden', marginBottom: '2rem' }}>
              <motion.h1 variants={item} className="font-display text-huge" style={{ lineHeight: 0.85, fontWeight: 400, paddingLeft: '4rem' }}>
-                ALCHEMY
+                ALCHEMIST
             </motion.h1>
         </div>
         
@@ -71,6 +72,36 @@ const Hero = () => {
       >
          <span className="text-label" style={{ display: 'block', marginBottom: '0.5rem' }}>Scroll</span>
       </motion.div>
+
+      {/* Resume Link */}
+      <div style={{ position: 'absolute', top: '2.5rem', right: '5rem', zIndex: 100 }}>
+          <Link to="/the-alchemist" className="text-label" style={{ 
+              textDecoration: 'none', 
+              color: 'var(--accent-gold)', 
+              border: '1px solid rgba(197, 160, 89, 0.3)', 
+              padding: '0.6rem 1.5rem', 
+              borderRadius: '20px',
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              transition: 'all 0.3s ease',
+              backdropFilter: 'blur(5px)'
+          }}
+          onMouseEnter={(e) => { 
+              e.target.style.backgroundColor = 'var(--accent-gold)'; 
+              e.target.style.color = '#000'; 
+              e.target.style.boxShadow = '0 0 20px rgba(197, 160, 89, 0.4)';
+          }}
+          onMouseLeave={(e) => { 
+              e.target.style.backgroundColor = 'transparent'; 
+              e.target.style.color = 'var(--accent-gold)'; 
+              e.target.style.boxShadow = 'none';
+          }}
+          >
+              My Resume
+          </Link>
+      </div>
     </section>
   );
 };

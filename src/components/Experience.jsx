@@ -5,22 +5,10 @@ import ExperienceScene from './3d/ExperienceScene';
 const Experience = () => {
   const experiences = [
     {
-      date: "2026 - Present",
+      date: "2025 - 2026 - Present",
       role: "AI Full Stack Web Developer",
       company: "Freelance / Independent",
       desc: "Building next-generation web experiences with AI integration, immersive 3D interactions, and blockchain technologies."
-    },
-    {
-      date: "2020 - 2023",
-      role: "UI/UX Developer",
-      company: "Innovate Labs",
-      desc: "Developed high-fidelity prototypes and production-ready interfaces. Specialized in micro-interactions."
-    },
-    {
-      date: "2018 - 2020",
-      role: "Frontend Engineer",
-      company: "StartUp Vision",
-      desc: "Built the core product MVP using modern JavaScript frameworks. Focused on performance optimization."
     }
   ];
 

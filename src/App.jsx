@@ -1,17 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { ReactLenis } from '@studio-freight/react-lenis';
-import Scene from './components/Scene';
 import Cursor from './components/Cursor';
-import Hero from './components/Hero';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
 import Preloader from './components/Preloader';
+import Home from './pages/Home';
+import Resume from './pages/Resume';
 
 function App() {
-  const mainRef = useRef(null)
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <>
@@ -19,17 +21,15 @@ function App() {
 
       {!loading && (
         <ReactLenis root>
-          <div ref={mainRef} className="app-wrapper" style={{ position: 'relative', zIndex: 1, backgroundColor: 'var(--bg-color)', cursor: 'none' }}>
-             {/* Global 3D Scene */}
-            <Scene eventSource={mainRef} style={{ pointerEvents: 'none', zIndex: -1 }} />
-            
+          <div className="app-wrapper" style={{ position: 'relative', zIndex: 1, backgroundColor: 'var(--bg-color)', cursor: 'none' }}>
+             
             <Cursor />
             
-            <Hero />
-            <Experience />
-            <Projects />
-            <Skills />
-            <Contact />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/the-alchemist" element={<Resume />} />
+            </Routes>
+
           </div>
         </ReactLenis>
       )}

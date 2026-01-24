@@ -1,5 +1,5 @@
 {
-  "name": "storytelling-resume-react",
+  "name": "the-alchemist",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -13,10 +13,13 @@
     "@react-three/drei": "^9.92.0",
     "@react-three/fiber": "^8.15.0",
     "@studio-freight/react-lenis": "^0.0.47",
+    "cities.json": "^1.1.50",
     "framer-motion": "^11.0.0",
+    "html2pdf.js": "^0.14.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.0",
+    "react-router-dom": "^7.13.0",
     "three": "^0.160.0"
   },
   "devDependencies": {

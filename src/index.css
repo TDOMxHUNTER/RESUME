@@ -79,6 +79,108 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-gold);
+/* Remove Number Input Spinners */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+
+/* Dark Scrollbar for Resume Editor */
+.editor-panel::-webkit-scrollbar,
+.editor-panel *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.editor-panel::-webkit-scrollbar-track,
+.editor-panel *::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.editor-panel::-webkit-scrollbar-thumb,
+.editor-panel *::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 4px;
+}
+
+/* Hide scrollbar for summary textarea but keep functionality */
+.summary-textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.summary-textarea {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.editor-panel::-webkit-scrollbar-thumb:hover,
+.editor-panel *::-webkit-scrollbar-thumb:hover {
+  background: #4B5563;
+}
+
+
+/* Print Styles for Resume PDF */
+@media print {
+  @page {
+    margin: 0;
+    size: auto;
+  }
+
+  body, html {
+    background-color: white !important;
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Hide everything by default (Advanced Profile, Cursor, UI, Modal Overlays) */
+  .app-wrapper > *, .no-print, .editor-panel, canvas, .cursor, .modal-overlay {
+    display: none !important; 
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+
+  /* Ensure the Print Area (Resume Content) is visible and flows naturally */
+  #resume-print-area {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important; /* Static flow for pagination */
+    top: auto !important;
+    left: auto !important;
+    transform: none !important; /* CRITICAL: Remove screen scaling */
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  /* Force background graphics (for the beige tint) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Override the Preview Card styles for print */
+  .resume-preview-node,
+  #resume-print-area,
+  #resume-preview-content {
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+      padding: 1.5rem 1.25rem !important; /* Minimal padding for print */
+      width: 100% !important;
+      max-width: none !important;
+      page-break-inside: auto; /* Allow breaking between pages */
+  }
 }
